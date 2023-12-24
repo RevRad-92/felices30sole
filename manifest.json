@@ -1,0 +1,30 @@
+{
+    "short_name": "G",
+    "name": "Greetings",
+    "start_url": "/",
+    "scope": "/",
+    "theme_color": "#9b4dca",
+    "background_color": "#000000",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": [
+        {
+        "src": "icons/birthday-girl_128.png",
+        "type": "image/png",
+        "sizes": "128x128",
+        "purpose": "maskable"
+    },
+    {
+        "src": "icons/birthday-girl_256.png",
+        "type": "image/png",
+        "sizes": "256x256",
+        "purpose": "any"
+    },
+    {
+        "src": "icons/birthday-girl_512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any"
+    }
+    ]
+}
