@@ -56,6 +56,7 @@ function crearCanvasDeImagen() {
     canvas.height = imagen.height
     ctx.drawImage(imagen, 0, 0, imagen.width, imagen.height) 
     document.querySelector("body").appendChild(canvas)
+    window.scrollTo(0, document.body.scrollHeight);
     return canvas.toDataURL("image/webp")
 }
 
