@@ -83,30 +83,23 @@ function postImagen() {
         }
     })
     .then((datos)=> {
-        notificarOperacion("Imagen publicada!", "noti-ok")
+        notificarOperacion("Saludo publicado!", "noti-ok")
     })
     .catch((error)=> notificarOperacion("Publicación fallida", "noti-ko"))
 }
 
 btnPublicar.addEventListener("click", postImagen)
 
-
 function notificarOperacion(mensaje, cssClass) {
     divNotificaciones.textContent = mensaje
     divNotificaciones.classList.add(cssClass)
     divNotificaciones.style.opacity = "1"
-    
-    divNotificaciones.style.opacity = "0"
-    divNotificaciones.classList.remove(cssClass)
-    
-    window.location.href = "./index.html"
-    
-    // setTimeout(() => {
-    //     divNotificaciones.style.opacity = "0"
-    //     divNotificaciones.classList.remove(cssClass)
-    // }, 3000)
+    setTimeout(() => {
+        divNotificaciones.style.opacity = "0"
+        divNotificaciones.classList.remove(cssClass)
+    }, 3000)
 
-    // setTimeout(() =>{
-    //     window.location.href = "./index.html"
-    // }, 3000)
+    setTimeout(() =>{
+        window.location.href = "./index.html"
+    }, 3000)
 }
