@@ -1,3 +1,5 @@
+//import 'whatwg-fetch'
+
 // tag img que tiene evento camara, y se reemplaza por imagen a subir
 const imagen = document.querySelector("#img");
 
@@ -60,6 +62,18 @@ function crearCanvasDeImagen() {
     return canvas.toDataURL("image/webp")
 }
 
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  }
 
 // SUBIR IMAGEN
 function postImagen() {
@@ -67,25 +81,52 @@ function postImagen() {
         imagen: imagenASubir,
         fecha: (new Date(Date.now())).toLocaleString(),
         mensaje: inputCaption.value,
-        autor: inputFirma.value
+        autor: inputFirma.value,
     }
 
-    fetch(url, { 
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(nuevaImagen) 
-    }) 
-    .then((response)=> {
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw new Error("No se pudo crear el recurso.")
-        }
-    })
-    .then((datos)=> {
-        notificarOperacion("Saludo publicado!", "noti-ok")
-    })
-    .catch((error)=> notificarOperacion("Publicación fallida", "noti-ko"))
+    console.log(JSON.stringify(nuevaImagen))
+
+    if (iOS()) 
+    {
+        console.log("the other side")
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true)
+        
+        xhr.setRequestHeader("Content-Type", "text/plain")
+        
+        xhr.send(`{ 
+            "imagen": "${imagenASubir}", 
+            "fecha": "${nuevaImagen.fecha}",
+            "mensaje": "${nuevaImagen.mensaje}",
+            "autor": "${nuevaImagen.autor}"    
+            "mode": "cors"
+        }`)
+
+        
+        // setTimeout(() =>{
+        //     window.location.href = "./index.html"
+        // }, 3000)
+
+    } else {
+
+        fetch(url, { 
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(nuevaImagen), 
+        }) 
+        .then((response)=> {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error("No se pudo crear el recurso.")
+            }
+        })
+        .then((datos)=> {
+            notificarOperacion("Saludo publicado!", "noti-ok")
+        })
+        .catch((error)=> notificarOperacion("Publicación fallida", "noti-ko"))
+    }
+    
 }
 
 btnPublicar.addEventListener("click", postImagen)
