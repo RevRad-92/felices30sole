@@ -4,15 +4,6 @@ const url = "https://6586271f468ef171392e09a2.mockapi.io/api/v1/images"
 const arrayImages = []
 const btnCamara = document.querySelector("#camara")
 
-// (function () {
-//     if (localStorage.getItem('config')) {
-//         localStorage.setItem();
-//         document.getElementById('slider').checked = false;
-//     } else {
-//         setTheme('theme-light');
-//       document.getElementById('slider').checked = true;
-//     }
-// })()
 
 recuperarDeLS()
 html.classList.add(actualTheme)
@@ -61,10 +52,10 @@ function showImages() {
             html = `
                     <div class="card" id="defaultCard">
                         <a href="/camara.html">
-                        <img id="default" src="images/takepic.jpg" style="width:100%">
+                        <img id="default" src="images/emptyframe_no_messages.jpg" style="width:100%">
                         </a>
                         <div class="container">
-                            <h4><b>¡Hacé click en la imagen para publicar tu primera foto!</b></h4>
+                            <h4><b>¡Hacé click en la imagen para publicar un saludo!</b></h4>
                             <p>${(new Date(Date.now())).toLocaleString()}</p>
                         </div>
                     </div>

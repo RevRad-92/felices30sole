@@ -1,5 +1,3 @@
-//import 'whatwg-fetch'
-
 // tag img que tiene evento camara, y se reemplaza por imagen a subir
 const imagen = document.querySelector("#img");
 
@@ -35,7 +33,6 @@ imagen.addEventListener("click", ()=> imagenInputFile.click())
 // muestra imagen capturada
 imagenInputFile.addEventListener("change", ()=> {
 
-        
         imagen.src = URL.createObjectURL(imagenInputFile.files[0]) 
 
         inputCaption.hidden = false
@@ -88,7 +85,7 @@ function postImagen() {
 
     if (iOS()) 
     {
-        console.log("the other side")
+        //console.log("iOS device via XMLHttpRequest")
         const xhr = new XMLHttpRequest();
         xhr.open("POST", url, true)
         
@@ -102,7 +99,6 @@ function postImagen() {
             "mode": "cors"
         }`)
 
-        
         setTimeout(() =>{
             window.location.href = "./index.html"
         }, 3000)
