@@ -185,14 +185,14 @@ a {
     outline-offset: -1px;
 }
 
-.button-full:hover, .button-full:hover.a {
+.button-full:hover /*.button-full:hover.a*/ {
     background-color: var(--color-secondary);
     color: var(--color-primary)
 }
 
-.button-full.a:hover {
+/* .button-full.a:hover {
     color: var(--color-primary)
-}
+} */
 
 
 .button-hollow:disabled:hover {

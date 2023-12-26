@@ -1,6 +1,23 @@
 // tag img que tiene evento camara, y se reemplaza por imagen a subir
 const imagen = document.querySelector("#img");
 
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
+if (iOS()) {
+    imagen.src = "images/no_disponible.png"
+}
+
 // imagen a subir
 let imagenASubir
 
@@ -8,7 +25,8 @@ let imagenASubir
 const imagenInputFile = document.querySelector("#uploadImage")
 imagenInputFile.hidden = true
 
-
+const btnCancelar = document.getElementById("cancelar")
+btnCancelar.addEventListener("click",()=> window.location.href = "./index.html")
 
 const btnPublicar = document.getElementById("publicar")
 btnPublicar.disabled = true
@@ -28,7 +46,9 @@ divNotificaciones.style.opacity = "0"
 recuperarDeLS()
 html.classList.add(actualTheme)
 
-imagen.addEventListener("click", ()=> imagenInputFile.click())
+if (!iOS()) { //filtro funcionalidad no disponible para iOS
+    imagen.addEventListener("click", ()=> imagenInputFile.click())
+}
 
 // muestra imagen capturada
 imagenInputFile.addEventListener("change", ()=> {
@@ -59,19 +79,6 @@ function crearCanvasDeImagen() {
     return canvas.toDataURL("image/webp")
 }
 
-function iOS() {
-    return [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-  }
-
 // SUBIR IMAGEN
 function postImagen() {
     const nuevaImagen = {
@@ -85,6 +92,7 @@ function postImagen() {
 
     if (iOS()) 
     {
+        // unreachable: condición previa si iOS => no permite pre-cargar imagen.
         //console.log("iOS device via XMLHttpRequest")
         const xhr = new XMLHttpRequest();
         xhr.open("POST", url, true)
